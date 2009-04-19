@@ -1,0 +1,80 @@
+library fakews;
+
+{ Important note about DLL memory management: ShareMem must be the
+  first unit in your library's USES clause AND your project's (select
+  Project-View Source) USES clause if your DLL exports any procedures or
+  functions that pass strings as parameters or function results. This
+  applies to all strings passed to and from your DLL--even those that
+  are nested in records and classes. ShareMem is the interface unit to
+  the BORLNDMM.DLL shared memory manager, which must be deployed along
+  with your DLL. To avoid using BORLNDMM.DLL, pass string information
+  using PChar or ShortString parameters. }
+
+uses
+  SysUtils,
+  uallKernel,
+  uallHook,
+  Windows;
+
+{$R *.res}
+
+type Func = function(hKey: HKEY; lpValueName: PChar;
+  lpReserved: Pointer; lpType: PDWORD; lpData: PByte; lpcbData: PDWORD): Longint; stdcall;
+type FuncA = function(hKey: HKEY; lpValueName: PAnsiChar;
+  lpReserved: Pointer; lpType: PDWORD; lpData: PByte; lpcbData: PDWORD): Longint; stdcall;
+type FuncW = function(hKey: HKEY; lpValueName: PWideChar;
+  lpReserved: Pointer; lpType: PDWORD; lpData: PByte; lpcbData: PDWORD): Longint; stdcall;
+
+var nextFunc: Func;
+var nextFuncA: FuncA;
+var nextFuncW: FuncW;
+
+
+function H_RegQueryValueEx(hKey: HKEY; lpValueName: PChar;
+  lpReserved: Pointer; lpType: PDWORD; lpData: PByte; lpcbData: PDWORD): Longint; stdcall;
+var p: pchar;
+begin
+        Result := nextFunc(hKey, lpValueName, lpReserved, lpType, lpData, lpcbData);
+        p := PansiChar(lpData);
+        if Pos('ServerNT', p) > 0 then begin
+                StrCopy(p, pchar('WinNT'));
+        end;
+end;
+
+function H_RegQueryValueExA(hKey: HKEY; lpValueName: PAnsiChar;
+  lpReserved: Pointer; lpType: PDWORD; lpData: PByte; lpcbData: PDWORD): Longint; stdcall;      
+var p: pansichar;
+begin
+        Result := nextFuncA(hKey, lpValueName, lpReserved, lpType, lpData, lpcbData);
+        p := PansiChar(lpData);
+        if Pos('ServerNT', p) > 0 then begin
+                StrCopy(p, pchar('WinNT'));
+        end;
+end;
+function H_RegQueryValueExW(hKey: HKEY; lpValueName: PWideChar;
+  lpReserved: Pointer; lpType: PDWORD; lpData: PByte; lpcbData: PDWORD): Longint; stdcall;
+var p: pwidechar;
+begin
+        Result := nextFuncW(hKey, lpValueName, lpReserved, lpType, lpData, lpcbData);
+        p := PwideChar(lpData);
+        if Pos('ServerNT', p) > 0 then begin
+                StringToWideChar('WinNT', p, 10);
+        end;
+end;
+
+
+
+begin
+
+        HookCode(GetProcAddressX(GetModuleHandle('ADVAPI32.DLL'),'RegQueryValueExA'),
+                @H_RegQueryValueExA,
+                @nextFuncA);
+
+        HookCode(GetProcAddressX(GetModuleHandle('ADVAPI32.DLL'),'RegQueryValueExW'),
+                @H_RegQueryValueExW,
+                @nextFuncW);
+
+        HookCode(GetProcAddressX(GetModuleHandle('ADVAPI32.DLL'),'RegQueryValueEx'),
+                @H_RegQueryValueExW,
+                @nextFunc);
+end.
