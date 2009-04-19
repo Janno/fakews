@@ -1,0 +1,16 @@
+How to build: 
+- Requires: 
+  1. Delphi 6 (other versions might work just as well)
+  2. uallCollection (http://omorphia.svn.sourceforge.net/viewvc/omorphia/trunk/uallCollection/)
+- Steps: 
+  1. Get requirements.
+  2. Compile and install uallCollection 
+  3. Open fakews project files.
+  4. Compile.
+
+How to use:
+- Arguments: 
+  1. Executable that is to be fooled. fakews will execute this file.
+
+  
+That's all.
