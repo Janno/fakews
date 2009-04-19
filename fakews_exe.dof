@@ -86,9 +86,8 @@ ProductName=
 ProductVersion=1.0.0.0
 Comments=
 [HistoryLists\hlUnitAliases]
-Count=2
-Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;fakews_exe=fakews
-Item1=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlOutputDirectorry]
 Count=1
 Item0=bin

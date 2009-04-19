@@ -75,6 +75,6 @@ begin
                 @nextFuncW);
 
         HookCode(GetProcAddressX(GetModuleHandle('ADVAPI32.DLL'),'RegQueryValueEx'),
-                @H_RegQueryValueExW,
+                @H_RegQueryValueEx,
                 @nextFunc);
 end.

@@ -74,7 +74,8 @@ begin
                 @H_RegQueryValueExW,
                 @nextFuncW);
 
-        HookCode(GetProcAddressX(GetModuleHandle('ADVAPI32.DLL'),'RegQueryValueEx'),
-                @H_RegQueryValueExW,
+        {HookCode(GetProcAddressX(GetModuleHandle('ADVAPI32.DLL'),'RegQueryValueEx'),
+                @H_RegQueryValueEx,
                 @nextFunc);
+        }
 end.

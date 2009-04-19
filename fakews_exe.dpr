@@ -51,8 +51,8 @@ begin
         end
         else begin
                 RunProcess(ParamStr(1), SW_RESTORE, FALSE, @PID);
-                WriteLn(Output, 'Injecting '+ExtractFilePath(ParamStr(0))+'fakexp.dll');
-                if InjectLibrary(PID,pchar(ExtractFilePath(ParamStr(0))+'fakexp.dll')) then begin
+                WriteLn(Output, 'Injecting '+ExtractFilePath(ParamStr(0))+'fakews.dll');
+                if InjectLibrary(PID,pchar(ExtractFilePath(ParamStr(0))+'fakews.dll')) then begin
                         WriteLn(Output, 'Hook injected.');
                 end
                 else begin
