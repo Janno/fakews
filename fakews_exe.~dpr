@@ -1,9 +1,9 @@
-program fakexp_exe;
+program fakews_exe;
 
 {$APPTYPE CONSOLE}
 
 uses
-  SysUtils, uallHook, uallKernel, uallUtil, Windows;
+  SysUtils, uallHook, uallUtil, Windows;
 
 function RunProcess(FileName: string; ShowCmd: DWORD; wait: Boolean; ProcID: PCardinal): Longword;
 var

@@ -29,7 +29,7 @@ Y=1
 Z=1
 ShowHints=1
 ShowWarnings=1
-UnitAliases=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
+UnitAliases=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;fakews_exe=fakews
 [Linker]
 MapFile=0
 OutputObjs=0
@@ -41,7 +41,7 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=fakexp
 [Directories]
-OutputDir=
+OutputDir=bin
 UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
@@ -86,5 +86,9 @@ ProductName=
 ProductVersion=1.0.0.0
 Comments=
 [HistoryLists\hlUnitAliases]
+Count=2
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;fakews_exe=fakews
+Item1=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
+[HistoryLists\hlOutputDirectorry]
 Count=1
-Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
+Item0=bin
